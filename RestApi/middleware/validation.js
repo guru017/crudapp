@@ -8,13 +8,17 @@ const schema = {
 
 }
 
+errorCount=0;
 function validationResult(req,res,next) {
 const v = new validator();
 result = v.validate(req.body , schema);
 if(result != true){
+    errorCount++;
     res.status(400).json({
         message : 'Validation Failed',
-        errors  : result
+        errors  : result,
+        errorCount:errorCount
+
     });
 }else{
     next()

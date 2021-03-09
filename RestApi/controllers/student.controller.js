@@ -5,7 +5,7 @@ const validator = require('fastest-validator');
 const jwt = require('jsonwebtoken');
 const bcryptjs  = require('bcryptjs');
 const { sign } = require('crypto');
-const { off } = require('../app');
+const { off, response } = require('../app');
 
 
 function save(req,res){
@@ -15,7 +15,7 @@ function save(req,res){
         sem: req.body.sem,
         branch: req.body.branch
     }
-
+      
     
 models.Student.create(student).then(result =>{
     res.status(201).json({
@@ -57,12 +57,13 @@ function showById(req,res){
 
 function showall(req,res){
     models.Student.findAll().then(result=>{
-        res.status(200).json(result);
-
-    }).catch(error=>{
+    res.status(200).json(result)})
+    .catch(error=>{
         res.status(500).json("Something went wrong")
     });
+    
 }
+
 
 
 
@@ -195,6 +196,78 @@ function login(req,res){
         
 }
 
+const getPagination = (page, size) => {
+    const limit = size ? +size : 3;
+    const offset = page ? page * limit : 0;
+  
+    return { limit, offset };
+  };
+
+  const getPagingData = (data, page, limit) => {
+    const { count: totalItems, rows: students } = data;
+    const currentPage = page ? +page : 0;
+    const totalPages = Math.ceil(totalItems / limit);
+  
+    return { totalItems, students: students, totalPages, currentPage };
+  };
+
+
+
+function page(req,res){
+    const {page,size} = req.query;
+    const {limit,offset} = getPagination(page,size);
+    models.Student.findAndCountAll({where : {branch:"ISE"}, limit, offset })
+    .then(data => {
+      const response = getPagingData(data, page, limit);
+      res.send(response);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    });
+};
+
+async function bulkinsertion(req,res){
+
+
+    var i;
+    let successCount =0; 
+    let errorCount = 0;
+    var student = req.body;
+
+    const schema = {
+        name : {type : "string" , optional : false , max :"100"},
+        sem : {type : "number" , optional  : false },
+        branch :{type : "string" , optional:false,max:"100"}
+    
+    }
+    for(i=0;i<student.length;i++){
+        const v = new validator();
+        var result1 = await  v.validate(student[i] , schema);
+        if(result1 === true){
+            var result = await models.Student.create(student[i]);
+            successCount++;
+             
+        }else{
+            errorCount++
+            return res.send({result1,errorCount,successCount})
+            
+            
+        }
+    }
+    
+    res.status(200).json({        
+        successCount:successCount,
+        errorCount:errorCount,  
+    });
+  
+  }
+
+
+
+
 
 module.exports = {
     save:save,
@@ -203,5 +276,8 @@ module.exports = {
     update:update,
     deletestudent:deletestudent,
     signup:signup,
-    login:login
+    login:login,
+    page:page,
+    bulkinsertion:bulkinsertion
 }
+

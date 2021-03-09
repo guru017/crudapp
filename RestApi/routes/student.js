@@ -6,12 +6,11 @@ const router = express.Router();
 const validMiddleware = require('../middleware/validation');
 const checkAuthMiddleware  = require('../middleware/auth');
 const models = require('../models');
+const { required } = require('joi');
+const bulkvalidator  = require('../middleware/bulkvalidator');
 
 //inserting 
 router.post("/", checkAuthMiddleware.checkAuth, validMiddleware.validationResult, studentController.save);
-
-//GetbyId
-router.get("/:id", checkAuthMiddleware.checkAuth,studentController.showById);
 
 //Get all students
 
@@ -33,8 +32,11 @@ router.post('/signup',studentController.signup);
 
 router.post('/login',studentController.login);
 
+//Pagination Api
+router.get('/pagination',checkAuthMiddleware.checkAuth,studentController.page);
 
-//router.get('/pagination',studentController.page);
+//Bulk insert Api
+router.post('/bulkInsert',studentController.bulkinsertion);
 
 module.exports = router;
 
