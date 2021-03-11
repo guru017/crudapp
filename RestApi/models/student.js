@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   Student.init({
     name: DataTypes.STRING,
     sem: DataTypes.INTEGER,
-    branch: DataTypes.STRING
+    branch: DataTypes.STRING,
+    email : DataTypes.STRING
   }, {
     sequelize,
     paranoid : true,

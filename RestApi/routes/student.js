@@ -7,7 +7,7 @@ const validMiddleware = require('../middleware/validation');
 const checkAuthMiddleware  = require('../middleware/auth');
 const models = require('../models');
 const { required } = require('joi');
-const bulkvalidator  = require('../middleware/bulkvalidator');
+
 
 //inserting 
 router.post("/", checkAuthMiddleware.checkAuth, validMiddleware.validationResult, studentController.save);
@@ -37,6 +37,7 @@ router.get('/pagination',checkAuthMiddleware.checkAuth,studentController.page);
 
 //Bulk insert Api
 router.post('/bulkInsert',studentController.bulkinsertion);
+
 
 module.exports = router;
 

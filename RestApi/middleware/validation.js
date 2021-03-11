@@ -4,7 +4,8 @@ const validator = require('fastest-validator');
 const schema = {
     name : {type : "string" , optional : false , max :"100"},
     sem : {type : "number" , optional  : false },
-    branch :{type : "string" , optional:false,max:"100"}
+    branch :{type : "string" , optional:false,max:"100"},
+    email:{type:"string",optional:false,max:"100",validate:{isEmail:true},unique:{args:true,msg:'Student with this Email already Exists!!'}}
 
 }
 

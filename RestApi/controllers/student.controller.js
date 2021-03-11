@@ -13,10 +13,17 @@ function save(req,res){
 
         name : req.body.name,
         sem: req.body.sem,
-        branch: req.body.branch
+        branch: req.body.branch,
+        email: req.body.email
     }
-      
-    
+models.Student.findOne({where : {email : req.body.email}}).then(result =>{
+    if(result){
+        res.status(409).json({
+        message : "Student with this Email Id already Exists!"
+    }); 
+}
+});
+
 models.Student.create(student).then(result =>{
     res.status(201).json({
         message : "Success",
@@ -240,33 +247,33 @@ async function bulkinsertion(req,res){
     const schema = {
         name : {type : "string" , optional : false , max :"100"},
         sem : {type : "number" , optional  : false },
-        branch :{type : "string" , optional:false,max:"100"}
-    
+        branch :{type : "string" , optional:false,max:"100"},
+        email:{type:"string",optional:false,max:"100",validate:{isEmail:true},unique:{args:true,msg:'Student with this Email already Exists!!'}}    
     }
+
     for(i=0;i<student.length;i++){
+        var result3 = await models.Student.findOne({where : {email : student[i].email}})
+        if(result3){
+            res.send("Student with this Email Id already Exists!!")
+        }
+        else{
         const v = new validator();
-        var result1 = await  v.validate(student[i] , schema);
-        if(result1 === true){
-            var result = await models.Student.create(student[i]);
-            successCount++;
-             
-        }else{
-            errorCount++
-            return res.send({result1,errorCount,successCount})
-            
-            
+        var result1 = await  v.validate(student[i] , schema); 
+        if(result1!=true){
+        errorCount++
+        //res.send({result1 , errorCount  })
+        continue
+            }
+        var result = await models.Student.create(student[i]);
+        successCount++; 
         }
     }
-    
     res.status(200).json({        
         successCount:successCount,
-        errorCount:errorCount,  
+        errorCount:errorCount,
+
     });
-  
   }
-
-
-
 
 
 module.exports = {
@@ -279,5 +286,7 @@ module.exports = {
     login:login,
     page:page,
     bulkinsertion:bulkinsertion
+    
 }
+
 
