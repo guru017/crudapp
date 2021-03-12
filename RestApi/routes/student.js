@@ -16,7 +16,7 @@ router.post("/", checkAuthMiddleware.checkAuth, validMiddleware.validationResult
 
 //Get all students
 
-router.get('/',studentController.showall);
+router.get('/',checkAuthMiddleware.checkAuth,studentController.showall);
 
 
 //Update
@@ -44,4 +44,3 @@ router.post('/bulkInsert',studentController.bulkinsertion);
 router.get('/externalApi',studentController.callExternalApiUsingRequest)
 
 module.exports = router;
-

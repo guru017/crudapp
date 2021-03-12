@@ -278,7 +278,7 @@ async function bulkinsertion(req,res){
 
   
 function callExternalApiUsingRequest(req,res){
-    request('https://pokeapi.co/api/v2/pokemon/pikachu',function(error , response,body){
+    request('https://pokeapi.co/api/v2/pokemon/pikachu',function(error ,response,body){
         if(!error){
             res.send(body)
         }
