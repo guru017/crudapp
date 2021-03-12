@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const bcryptjs  = require('bcryptjs');
 const { sign } = require('crypto');
 const { off, response } = require('../app');
+const request = require('request');
 
 
 function save(req,res){
@@ -275,6 +276,16 @@ async function bulkinsertion(req,res){
     });
   }
 
+  
+function callExternalApiUsingRequest(req,res){
+    request('https://pokeapi.co/api/v2/pokemon/pikachu',function(error , response,body){
+        if(!error){
+            res.send(body)
+        }
+    });
+
+}
+
 
 module.exports = {
     save:save,
@@ -285,7 +296,8 @@ module.exports = {
     signup:signup,
     login:login,
     page:page,
-    bulkinsertion:bulkinsertion
+    bulkinsertion:bulkinsertion,
+    callExternalApiUsingRequest:callExternalApiUsingRequest
     
 }
 
