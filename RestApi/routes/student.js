@@ -16,7 +16,7 @@ router.post("/", checkAuthMiddleware.checkAuth, validMiddleware.validationResult
 
 //Get all students
 
-router.get('/',checkAuthMiddleware.checkAuth,studentController.showall);
+router.get('/',studentController.showall);
 
 
 //Update

@@ -1,3 +1,4 @@
+const cool = require('cool-ascii-faces');
 const express = require('express');
 const db = require('./dbconfig');
 const app = express();
@@ -7,6 +8,8 @@ app.use(bodyparser.json());
 app.get('/',(req,res)=>{
     res.send('Hello World');
 });
+
+app.get('/cool', (req, res) => res.send(cool()))
 
 const studentRoute = require('./routes/student');
 

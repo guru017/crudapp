@@ -1,6 +1,7 @@
+const cool = require('cool-ascii-faces');
 const http = require('http');
 const app = require('./app');
 
-const port = 3030;
+var PORT = process.env.PORT || 3030;
 
-app.listen(port , () =>console.log("Server is running on port",port));
+app.listen(PORT , () =>console.log("Server is running on port",PORT));
