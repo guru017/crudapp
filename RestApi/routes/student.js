@@ -43,4 +43,7 @@ router.post('/bulkInsert',studentController.bulkinsertion);
 // Calling to External Api
 router.get('/externalApi',studentController.callExternalApiUsingRequest)
 
+//Bulk Update Api
+router.patch('/bulkupdate',studentController.bulkupdate);
+
 module.exports = router;

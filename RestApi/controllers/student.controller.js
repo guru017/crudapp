@@ -276,6 +276,41 @@ async function bulkinsertion(req,res){
     });
   }
 
+
+  async function bulkupdate(req,res){
+
+
+    var i;
+    let successCount =0; 
+    let errorCount = 0;
+    var student = req.body;
+
+    const schema = {
+        name : {type : "string" , optional : false , max :"100"},
+        sem : {type : "number" , optional  : false },
+        branch :{type : "string" , optional:false,max:"100"}  
+    }
+
+    for(i=0;i<student.length;i++){
+
+        const v = new validator();
+        var result1 = await  v.validate(student[i] , schema); 
+        if(result1!=true){
+        errorCount++
+        continue
+        }
+        
+        var result = await models.Student.update(student[i],{where : {email : student[i].email}});
+        successCount++; 
+        
+    }
+    res.status(200).json({        
+        successCount:successCount,
+        errorCount:errorCount
+
+    });
+}
+
   
 function callExternalApiUsingRequest(req,res){
     request('https://pokeapi.co/api/v2/pokemon/pikachu',function(error ,response,body){
@@ -297,8 +332,8 @@ module.exports = {
     login:login,
     page:page,
     bulkinsertion:bulkinsertion,
-    callExternalApiUsingRequest:callExternalApiUsingRequest
-    
+    bulkupdate:bulkupdate,
+    callExternalApiUsingRequest:callExternalApiUsingRequest  
 }
 
 
