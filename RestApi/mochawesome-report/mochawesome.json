@@ -1,0 +1,288 @@
+{
+  "stats": {
+    "suites": 5,
+    "tests": 6,
+    "passes": 3,
+    "pending": 0,
+    "failures": 3,
+    "start": "2021-04-09T11:30:49.088Z",
+    "end": "2021-04-09T11:30:49.229Z",
+    "duration": 141,
+    "testsRegistered": 6,
+    "passPercent": 50,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "d471fa2f-bcb0-4f89-85a9-3be2d29d19ed",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ac6e97d1-1030-4024-b084-ffb804e9c47d",
+          "title": "Rest API",
+          "fullFile": "/home/manjunathan/crudapp/RestApi/test/test.js",
+          "file": "/test/test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "43a7edee-f80d-4fa7-9e4b-6477df86716c",
+              "title": "GET /student ",
+              "fullFile": "/home/manjunathan/crudapp/RestApi/test/test.js",
+              "file": "/test/test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It should GET all the Student lists",
+                  "fullTitle": "Rest API GET /student  It should GET all the Student lists",
+                  "timedOut": false,
+                  "duration": 71,
+                  "state": "passed",
+                  "speed": "medium",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "chai.request(server)\n    .get(\"/student\")\n    .end((err, response) => {\n        response.should.have.status(200);\n        response.body.should.be.a('array');       \n    done();\n    });",
+                  "err": {},
+                  "uuid": "70068776-4e0b-4d37-8cde-4532bc7f429d",
+                  "parentUUID": "43a7edee-f80d-4fa7-9e4b-6477df86716c",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "It should NOT GET all the student lists",
+                  "fullTitle": "Rest API GET /student  It should NOT GET all the student lists",
+                  "timedOut": false,
+                  "duration": 6,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "chai.request(server)\n    .get(\"/student/api\")\n    .end((err, response) => {\n        response.should.have.status(404);\n        response.text.should.be.eq(\"Can not Get the Students lists\");\n    done();\n    });",
+                  "err": {
+                    "message": "AssertionError: expected '<!DOCTYPE html>\\n<html lang=\"en\">\\n<head>\\n<meta charset=\"utf-8\">\\n<title>Error</title>\\n</head>\\n<body>\\n<pre>Cannot GET /student/api</pre>\\n</body>\\n</html>\\n' to equal 'Can not Get the Students lists'",
+                    "estack": "AssertionError: expected '<!DOCTYPE html>\\n<html lang=\"en\">\\n<head>\\n<meta charset=\"utf-8\">\\n<title>Error</title>\\n</head>\\n<body>\\n<pre>Cannot GET /student/api</pre>\\n</body>\\n</html>\\n' to equal 'Can not Get the Students lists'\n    at chai.request.get.end (test/test.js:36:45)\n    at Test.Request.callback (node_modules/superagent/lib/node/index.js:716:12)\n    at IncomingMessage.parser (node_modules/superagent/lib/node/index.js:916:18)\n    at endReadableNT (_stream_readable.js:1145:12)\n    at process._tickCallback (internal/process/next_tick.js:63:19)",
+                    "diff": "- <!DOCTYPE html>\n- <html lang=\"en\">\n- <head>\n- <meta charset=\"utf-8\">\n- <title>Error</title>\n- </head>\n- <body>\n- <pre>Cannot GET /student/api</pre>\n- </body>\n- </html>\n+ Can not Get the Students lists\n"
+                  },
+                  "uuid": "171bd0a9-4c29-4520-ae96-0a11f4326a39",
+                  "parentUUID": "43a7edee-f80d-4fa7-9e4b-6477df86716c",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "70068776-4e0b-4d37-8cde-4532bc7f429d"
+              ],
+              "failures": [
+                "171bd0a9-4c29-4520-ae96-0a11f4326a39"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 77,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "4f898cea-3efd-4480-b51f-eade16dd8860",
+              "title": "POST /student",
+              "fullFile": "/home/manjunathan/crudapp/RestApi/test/test.js",
+              "file": "/test/test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It should NOT POST a new Student without Proper validation",
+                  "fullTitle": "Rest API POST /student It should NOT POST a new Student without Proper validation",
+                  "timedOut": false,
+                  "duration": 34,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const student = {\n    name  : 45\n};\nchai.request(server)                \n    .post(\"/student\")\n    .send(student)\n    .end((err, response) => {\n        response.should.have.status(400);\n        response.text.should.be.eq(\"The name should be of String !!!\");\n    done();\n    });",
+                  "err": {
+                    "message": "AssertionError: expected '{\"message\":\"Validation Failed\",\"errors\":[{\"type\":\"string\",\"message\":\"The \\'name\\' field must be a string.\",\"field\":\"name\",\"actual\":45},{\"type\":\"required\",\"message\":\"The \\'sem\\' field is required.\",\"field\":\"sem\"},{\"type\":\"required\",\"message\":\"The \\'branch\\' field is required.\",\"field\":\"branch\"},{\"type\":\"required\",\"message\":\"The \\'email\\' field is required.\",\"field\":\"email\"}],\"errorCount\":1}' to equal 'The name should be of String !!!'",
+                    "estack": "AssertionError: expected '{\"message\":\"Validation Failed\",\"errors\":[{\"type\":\"string\",\"message\":\"The \\'name\\' field must be a string.\",\"field\":\"name\",\"actual\":45},{\"type\":\"required\",\"message\":\"The \\'sem\\' field is required.\",\"field\":\"sem\"},{\"type\":\"required\",\"message\":\"The \\'branch\\' field is required.\",\"field\":\"branch\"},{\"type\":\"required\",\"message\":\"The \\'email\\' field is required.\",\"field\":\"email\"}],\"errorCount\":1}' to equal 'The name should be of String !!!'\n    at chai.request.post.send.end (test/test.js:76:45)\n    at Test.Request.callback (node_modules/superagent/lib/node/index.js:716:12)\n    at parser (node_modules/superagent/lib/node/index.js:916:18)\n    at IncomingMessage.res.on (node_modules/superagent/lib/node/parsers/json.js:19:7)\n    at endReadableNT (_stream_readable.js:1145:12)\n    at process._tickCallback (internal/process/next_tick.js:63:19)",
+                    "diff": "- {\"message\":\"Validation Failed\",\"errors\":[{\"type\":\"string\",\"message\":\"The 'name' field must be a string.\",\"field\":\"name\",\"actual\":45},{\"type\":\"required\",\"message\":\"The 'sem' field is required.\",\"field\":\"sem\"},{\"type\":\"required\",\"message\":\"The 'branch' field is required.\",\"field\":\"branch\"},{\"type\":\"required\",\"message\":\"The 'email' field is required.\",\"field\":\"email\"}],\"errorCount\":1}\n+ The name should be of String !!!\n"
+                  },
+                  "uuid": "aa195e83-b040-42b1-8a57-f2058a363015",
+                  "parentUUID": "4f898cea-3efd-4480-b51f-eade16dd8860",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "aa195e83-b040-42b1-8a57-f2058a363015"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 34,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "8d6b40f6-8b91-439a-b736-a3f8b85efa15",
+              "title": "PUT /student/:id",
+              "fullFile": "/home/manjunathan/crudapp/RestApi/test/test.js",
+              "file": "/test/test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It should Update an existing Student",
+                  "fullTitle": "Rest API PUT /student/:id It should Update an existing Student",
+                  "timedOut": false,
+                  "duration": 14,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const id = 502;\nconst student = {\n    name: \"Sahan1\",\n    sem  : 5,\n    branch : \"ISE\",\n    email  : \"Chetan@123\"\n        \n};\nchai.request(server)                \n    .put(\"/student/\" + id)\n    .send(student)\n    .end((err, response) => {\n        response.should.have.status(200);\n        response.body.should.be.a('object');\n        response.body.should.have.property('message').eql(\"Updated Successfully\");\n        response.body.should.have.property('post').eql({\n            \"name\": \"Sahan1\",\n            \"sem\": 5,\n            \"branch\": \"ISE\",\n            \"email\": \"Chetan@123\"\n        });\n        \n    done();\n    });",
+                  "err": {},
+                  "uuid": "0d33e5dc-adca-41bd-86f0-ba5589df7570",
+                  "parentUUID": "8d6b40f6-8b91-439a-b736-a3f8b85efa15",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "It should NOT Update an existing student without proper validation",
+                  "fullTitle": "Rest API PUT /student/:id It should NOT Update an existing student without proper validation",
+                  "timedOut": false,
+                  "duration": 2,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const id = 502;\nconst student = {\n    name: 45\n    \n};\nchai.request(server)                \n    .put(\"/student/\" + id)\n    .send(student)\n    .end((err, response) => {\n        response.should.have.status(400);\n        response.text.should.be.eq(\"The name should be of String!\");\n    done();\n    });",
+                  "err": {
+                    "message": "AssertionError: expected '{\"message\":\"Validation Failed\",\"errors\":[{\"type\":\"string\",\"message\":\"The \\'name\\' field must be a string.\",\"field\":\"name\",\"actual\":45},{\"type\":\"required\",\"message\":\"The \\'sem\\' field is required.\",\"field\":\"sem\"},{\"type\":\"required\",\"message\":\"The \\'branch\\' field is required.\",\"field\":\"branch\"},{\"type\":\"required\",\"message\":\"The \\'email\\' field is required.\",\"field\":\"email\"}],\"errorCount\":2}' to equal 'The name should be of String!'",
+                    "estack": "AssertionError: expected '{\"message\":\"Validation Failed\",\"errors\":[{\"type\":\"string\",\"message\":\"The \\'name\\' field must be a string.\",\"field\":\"name\",\"actual\":45},{\"type\":\"required\",\"message\":\"The \\'sem\\' field is required.\",\"field\":\"sem\"},{\"type\":\"required\",\"message\":\"The \\'branch\\' field is required.\",\"field\":\"branch\"},{\"type\":\"required\",\"message\":\"The \\'email\\' field is required.\",\"field\":\"email\"}],\"errorCount\":2}' to equal 'The name should be of String!'\n    at chai.request.put.send.end (test/test.js:123:45)\n    at Test.Request.callback (node_modules/superagent/lib/node/index.js:716:12)\n    at parser (node_modules/superagent/lib/node/index.js:916:18)\n    at IncomingMessage.res.on (node_modules/superagent/lib/node/parsers/json.js:19:7)\n    at endReadableNT (_stream_readable.js:1145:12)\n    at process._tickCallback (internal/process/next_tick.js:63:19)",
+                    "diff": "- {\"message\":\"Validation Failed\",\"errors\":[{\"type\":\"string\",\"message\":\"The 'name' field must be a string.\",\"field\":\"name\",\"actual\":45},{\"type\":\"required\",\"message\":\"The 'sem' field is required.\",\"field\":\"sem\"},{\"type\":\"required\",\"message\":\"The 'branch' field is required.\",\"field\":\"branch\"},{\"type\":\"required\",\"message\":\"The 'email' field is required.\",\"field\":\"email\"}],\"errorCount\":2}\n+ The name should be of String!\n"
+                  },
+                  "uuid": "3ca8e389-3075-4171-b8c1-a66afb197ac2",
+                  "parentUUID": "8d6b40f6-8b91-439a-b736-a3f8b85efa15",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "0d33e5dc-adca-41bd-86f0-ba5589df7570"
+              ],
+              "failures": [
+                "3ca8e389-3075-4171-b8c1-a66afb197ac2"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 16,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "ac671865-dd88-45a4-8af1-7a3f198f9dec",
+              "title": "DELETE /student/:id",
+              "fullFile": "/home/manjunathan/crudapp/RestApi/test/test.js",
+              "file": "/test/test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It should DELETE an existing student",
+                  "fullTitle": "Rest API DELETE /student/:id It should DELETE an existing student",
+                  "timedOut": false,
+                  "duration": 4,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const id = 1;\nchai.request(server)                \n    .delete(\"/student/\" + id)\n    .end((err, response) => {\n        response.should.have.status(200);\n    done();\n    });",
+                  "err": {},
+                  "uuid": "6c576189-3212-4344-8324-ddcc6281b413",
+                  "parentUUID": "ac671865-dd88-45a4-8af1-7a3f198f9dec",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "6c576189-3212-4344-8324-ddcc6281b413"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 4,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "8.3.2"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.2"
+    },
+    "marge": {
+      "options": null,
+      "version": "5.2.0"
+    }
+  }
+}

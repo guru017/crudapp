@@ -64,9 +64,11 @@ function showById(req,res){
 }
 
 function showall(req,res){
+    //console.log("student list");
     models.Student.findAll().then(result=>{
     res.status(200).json(result)})
     .catch(error=>{
+        //console.log(error);
         res.status(500).json("Something went wrong")
     });
     
@@ -80,7 +82,8 @@ function update(req,res){
     const updatedstudent = {
         name : req.body.name,
         sem: req.body.sem,
-        branch : req.body.branch
+        branch : req.body.branch,
+        email  : req.body.email
     }
 
     
@@ -105,7 +108,7 @@ function update(req,res){
 function deletestudent (req,res){
     const id = req.params.id;
 
-    models.Student.destroy({where : {id:id }}).then(result=>{
+    models.Student.destroy({ where : {id:id }}).then(result=>{
 
         res.status(200).json({
             message  : "Deleted Successfully",

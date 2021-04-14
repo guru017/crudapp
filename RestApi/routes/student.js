@@ -12,7 +12,7 @@ const request = require('request');
 
 
 //inserting 
-router.post("/", checkAuthMiddleware.checkAuth, validMiddleware.validationResult, studentController.save);
+router.post("/", validMiddleware.validationResult, studentController.save);
 
 //Get all students
 
@@ -21,11 +21,11 @@ router.get('/',studentController.showall);
 
 //Update
 
-router.put('/:id', checkAuthMiddleware.checkAuth,validMiddleware.validationResult,studentController.update);
+router.put('/:id', validMiddleware.validationResult,studentController.update);
 
 //Delete
 
-router.delete('/:id',checkAuthMiddleware.checkAuth,studentController.deletestudent);
+router.delete('/:id',studentController.deletestudent);
 
 //signup
 router.post('/signup',studentController.signup);
