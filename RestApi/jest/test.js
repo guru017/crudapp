@@ -2,11 +2,21 @@ var request = require('supertest');
 var server = require('../server');
 var app = require('../app');
 var models = require('../models');
+const { JsonWebTokenError } = require('jsonwebtoken');
 
 
-beforeEach(async()=>{
-    await models.Student.destroy({where:{}});
+ beforeEach(async()=>{
+    let data = {
+        name : "Sarang",
+        sem  : 6,
+        branch:"ISE",
+        email : "Sarang@123.com"
+        }
+    await models.Student.create(data);
 });
+afterEach(async()=>{
+    await models.Student.destroy({where:{}});
+})
 
 describe('Rest Api' , ()=>{
 
@@ -26,6 +36,7 @@ describe('Rest Api' , ()=>{
             const res  = await request(server)
             .get('/student/api');
             expect(res.statusCode).toEqual(404);
+
 
         })
 
@@ -118,7 +129,21 @@ describe('Rest Api' , ()=>{
             .expect(404)
 
         });
+
+        test("It Should NOT update existing one" , async()=>{
+            let ID  = 7;
+        let data = {
+            name : "Srujan_Update",
+            sem  : 5,
+            branch:"CSE",
+            email : "Srujan@123.com"  
+        }
+            const res  = await request(server)
+            .put('/student/update/api')
+            .send(data)
+            .expect(404)
         
+        });    
     });
 });
 

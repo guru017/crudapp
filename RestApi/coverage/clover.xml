@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1618381659367" clover="3.2.0">
-  <project timestamp="1618381659368" name="All files">
-    <metrics statements="198" coveredstatements="105" conditionals="41" coveredconditionals="11" methods="52" coveredmethods="17" elements="291" coveredelements="133" complexity="0" loc="198" ncloc="198" packages="5" files="11" classes="11"/>
+<coverage generated="1618514379488" clover="3.2.0">
+  <project timestamp="1618514379488" name="All files">
+    <metrics statements="197" coveredstatements="104" conditionals="41" coveredconditionals="11" methods="52" coveredmethods="17" elements="290" coveredelements="132" complexity="0" loc="197" ncloc="197" packages="5" files="11" classes="11"/>
     <package name="RestApi">
-      <metrics statements="25" coveredstatements="23" conditionals="4" coveredconditionals="3" methods="4" coveredmethods="2"/>
+      <metrics statements="24" coveredstatements="22" conditionals="4" coveredconditionals="3" methods="4" coveredmethods="2"/>
       <file name="app.js" path="/home/manjunathan/crudapp/RestApi/app.js">
         <metrics statements="12" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -20,14 +20,13 @@
         <line num="20" count="1" type="stmt"/>
       </file>
       <file name="dbconfig.js" path="/home/manjunathan/crudapp/RestApi/dbconfig.js">
-        <metrics statements="7" coveredstatements="6" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <metrics statements="6" coveredstatements="5" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
+        <line num="12" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
       </file>
       <file name="server.js" path="/home/manjunathan/crudapp/RestApi/server.js">
         <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
